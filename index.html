@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>地理鬥獸場之成為5**狀元的荊棘之路（河流與海岸）</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ==================== 全域樣式 ==================== */
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --blue-grey: #4A6FA5;
+  --blue-grey-light: #6B8DBE;
+  --blue-grey-dark: #2E4A73;
+  --purple-light: #B8A9D9;
+  --purple: #9B7FCF;
+  --purple-dark: #7B5BA8;
+  --gold: #D4A843;
+  --gold-light: #E8C560;
+  --cream: #F5F0E8;
+  --dark: #1a1a2e;
+  --dark-card: #16213e;
+}
+body {
+  font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+  background: linear-gradient(135deg, #0f0e17 0%, #1a1a2e 50%, #16213e 100%);
+  color: #e0e0e0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ==================== 導航欄 ==================== */
+.navbar {
+  position: fixed; top:0; left:0; width:100%; z-index:1000;
+  background: rgba(15,14,23,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--gold);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 30px; height: 64px;
+}
+.navbar .logo {
+  font-size: 18px; font-weight: 900; color: var(--gold-light);
+  text-shadow: 0 0 15px rgba(212,168,67,0.4);
+  letter-spacing: 1px;
+}
+.navbar .nav-tabs { display: flex; gap: 5px; }
+.navbar .nav-tab {
+  padding: 8px 18px; cursor: pointer; border-radius: 8px;
+  font-size: 14px; font-weight: 500; color: #aaa;
+  transition: all .3s; border: 1px solid transparent;
+}
+.navbar .nav-tab:hover { color: #fff; background: rgba(255,255,255,0.08); }
+.navbar .nav-tab.active {
+  color: var(--gold-light); border-color: var(--gold);
+  background: rgba(212,168,67,0.1);
+}
+.navbar .bank-count {
+  font-size: 12px; color: #888; margin-left: 10px;
+}
+
+/* ==================== 頁面容器 ==================== */
+.page-container { padding: 80px 24px 24px; display: none; }
+.page-container.active { display: block; }
+.page-title {
+  font-size: 24px; font-weight: 700; margin-bottom: 20px;
+  color: var(--gold-light);
+}
+.page-subtitle {
+  font-size: 14px; color: #aaa; margin-bottom: 24px;
+}
+
+/* ==================== 卡片通用 ==================== */
+.card {
+  background: rgba(22,33,62,0.8);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px; padding: 24px;
+  margin-bottom: 20px;
+}
+.card-title {
+  font-size: 17px; font-weight: 700; margin-bottom: 16px;
+  color: #e8d5b5; display: flex; align-items: center; gap: 8px;
+}
+.card-title .icon { font-size: 20px; }
+
+/* ==================== 按鈕 ==================== */
+.btn {
+  padding: 10px 22px; border: none; border-radius: 8px;
+  cursor: pointer; font-size: 14px; font-weight: 500;
+  font-family: inherit; transition: all .3s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: #1a1a2e; font-weight: 700;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,168,67,0.35); }
+.btn-secondary {
+  background: rgba(74,111,165,0.3); color: var(--blue-grey-light);
+  border: 1px solid var(--blue-grey);
+}
+.btn-secondary:hover { background: rgba(74,111,165,0.5); color: #fff; }
+.btn-purple {
+  background: rgba(155,127,207,0.3); color: var(--purple-light);
+  border: 1px solid var(--purple);
+}
+.btn-purple:hover { background: rgba(155,127,207,0.5); color: #fff; }
+.btn-danger {
+  background: rgba(220,53,69,0.2); color: #e07a82;
+  border: 1px solid rgba(220,53,69,0.4);
+}
+.btn-danger:hover { background: rgba(220,53,69,0.4); color: #fff; }
+.btn-large { padding: 14px 32px; font-size: 16px; }
+.btn:disabled { opacity: .4; cursor: not-allowed; }
+
+/* ==================== 輸入 ==================== */
+input[type="text"], input[type="number"], textarea, select {
+  background: rgba(15,14,23,0.6); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px; padding: 10px 14px; color: #e0e0e0;
+  font-size: 14px; font-family: inherit; width: 100%;
+  transition: border-color .3s;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: var(--gold); outline: none;
+}
+textarea { resize: vertical; min-height: 60px; }
+label.field-label {
+  display: block; font-size: 13px; color: #aaa; margin-bottom: 6px; margin-top: 12px;
+}
+
+/* ==================== 第一部分：題庫 ==================== */
+.quiz-section-tabs {
+  display: flex; gap: 8px; margin-bottom: 20px;
+}
+.quiz-section-tab {
+  padding: 10px 20px; border-radius: 10px; cursor: pointer;
+  font-size: 14px; font-weight: 500; border: 2px solid transparent;
+  transition: all .3s; background: rgba(255,255,255,0.05); color: #888;
+}
+.quiz-section-tab:hover { color: #ccc; }
+.quiz-section-tab.active {
+  background: rgba(212,168,67,0.12); border-color: var(--gold); color: var(--gold-light);
+}
+
+/* AI 生成區 */
+.ai-gen-box { display: none; }
+.ai-gen-box.active { display: block; }
+.ai-amount-row {
+  display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin: 16px 0;
+}
+.ai-amount-btn {
+  width: 80px; height: 80px; border-radius: 16px; cursor: pointer;
+  font-size: 22px; font-weight: 700; font-family: inherit;
+  border: 2px solid rgba(255,255,255,0.1);
+  background: rgba(74,111,165,0.15); color: var(--blue-grey-light);
+  transition: all .3s; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+.ai-amount-btn .label { font-size: 11px; font-weight: 400; margin-top: 2px; }
+.ai-amount-btn:hover { border-color: var(--blue-grey); transform: translateY(-2px); }
+.ai-amount-btn.selected {
+  background: rgba(74,111,165,0.3); border-color: var(--blue-grey);
+  color: #fff; box-shadow: 0 4px 15px rgba(74,111,165,0.3);
+}
+
+/* 手動題目庫 */
+.manual-box { display: none; }
+.manual-box.active { display: block; }
+.manual-q-list {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px; max-height: 400px; overflow-y: auto; padding: 4px;
+}
+.manual-q-card {
+  background: rgba(15,14,23,0.6); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px; padding: 14px; cursor: pointer; transition: all .3s;
+  font-size: 13px; line-height: 1.6;
+}
+.manual-q-card:hover { border-color: var(--purple); background: rgba(155,127,207,0.08); }
+.manual-q-card.added { border-color: var(--gold); background: rgba(212,168,67,0.1); }
+.manual-q-card.added::after {
+  content: '✓ 已加入'; float: right; color: var(--gold-light); font-weight: 700;
+}
+.manual-q-card .mq-tag {
+  display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 4px;
+  background: rgba(74,111,165,0.2); color: var(--blue-grey-light); margin-bottom: 6px;
+}
+
+/* DIY 區 */
+.diy-box { display: none; }
+.diy-box.active { display: block; }
+.diy-options-row {
+  display: flex; flex-direction: column; gap: 10px; margin: 12px 0;
+}
+.diy-option-input {
+  display: flex; align-items: center; gap: 10px;
+}
+.diy-option-input .opt-letter {
+  width: 28px; height: 28px; border-radius: 50%; display: flex;
+  align-items: center; justify-content: center; font-weight: 700;
+  font-size: 13px; background: rgba(255,255,255,0.08); color: #aaa;
+}
+.diy-option-input.correct .opt-letter {
+  background: rgba(40,167,69,0.3); color: #5cb85c;
+}
+.diy-answer-mark {
+  cursor: pointer; color: #666; font-size: 18px;
+  transition: color .3s;
+}
+.diy-answer-mark.active { color: #5cb85c; }
+
+/* 題目列表 */
+.quiz-list-section {
+  margin-top: 24px;
+}
+.quiz-list-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 12px;
+}
+.quiz-list-header h3 { font-size: 16px; color: #e8d5b5; }
+.quiz-list-count {
+  background: rgba(212,168,67,0.15); color: var(--gold-light);
+  padding: 4px 14px; border-radius: 20px; font-size: 13px; font-weight: 700;
+}
+.quiz-list-items {
+  max-height: 300px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;
+}
+.quiz-list-item {
+  background: rgba(15,14,23,0.5); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px; padding: 12px 16px; display: flex;
+  justify-content: space-between; align-items: center; font-size: 13px;
+}
+.quiz-list-item .qi-text { flex: 1; line-height: 1.5; }
+.quiz-list-item .qi-remove {
+  color: #c0392b; cursor: pointer; font-size: 16px; margin-left: 12px;
+  opacity: .6; transition: opacity .3s;
+}
+.quiz-list-item .qi-remove:hover { opacity: 1; }
+.quiz-list-item .qi-tag-diy {
+  font-size: 10px; padding: 2px 8px; border-radius: 4px;
+  background: rgba(155,127,207,0.2); color: var(--purple-light); margin-left: 8px;
+}
+
+/* ==================== 第二部分：競賽 ==================== */
+.setup-area { max-width: 700px; margin: 0 auto; }
+.setup-row { display: flex; gap: 16px; margin-bottom: 16px; }
+.setup-field { flex: 1; }
+.player-select-grid {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px;
+  max-height: 200px; overflow-y: auto; padding: 4px;
+}
+.player-select-item {
+  padding: 8px; border-radius: 8px; cursor: pointer; text-align: center;
+  font-size: 12px; border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(15,14,23,0.5); transition: all .2s;
+}
+.player-select-item:hover { border-color: rgba(255,255,255,0.2); }
+.player-select-item.selected-left {
+  border-color: var(--blue-grey); background: rgba(74,111,165,0.2); color: var(--blue-grey-light);
+}
+.player-select-item.selected-right {
+  border-color: var(--purple); background: rgba(155,127,207,0.2); color: var(--purple-light);
+}
+.time-select-row { display: flex; gap: 12px; margin: 16px 0; }
+.time-btn {
+  flex: 1; padding: 16px; border-radius: 12px; cursor: pointer;
+  font-size: 16px; font-weight: 700; font-family: inherit;
+  border: 2px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05); color: #888; transition: all .3s;
+  text-align: center;
+}
+.time-btn:hover { border-color: rgba(255,255,255,0.2); }
+.time-btn.selected {
+  background: rgba(212,168,67,0.12); border-color: var(--gold); color: var(--gold-light);
+}
+.time-btn .sub { font-size: 11px; font-weight: 400; display: block; margin-top: 2px; }
+
+/* PK 界面 */
+.pk-container { display: none; }
+.pk-container.active { display: block; }
+.pk-board {
+  display: flex; gap: 4px; height: calc(100vh - 80px);
+}
+.pk-side {
+  flex: 1; display: flex; flex-direction: column; padding: 20px;
+  position: relative; overflow: hidden;
+}
+.pk-side.left {
+  background: linear-gradient(160deg, rgba(74,111,165,0.15), rgba(46,74,115,0.08));
+  border-left: 3px solid var(--blue-grey);
+}
+.pk-side.right {
+  background: linear-gradient(200deg, rgba(155,127,207,0.15), rgba(123,91,168,0.08));
+  border-right: 3px solid var(--purple);
+}
+.pk-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 16px;
+}
+.pk-player-name {
+  font-size: 18px; font-weight: 700;
+}
+.pk-side.left .pk-player-name { color: var(--blue-grey-light); }
+.pk-side.right .pk-player-name { color: var(--purple-light); }
+.pk-score {
+  font-size: 28px; font-weight: 900;
+  background: rgba(0,0,0,0.3); padding: 4px 20px; border-radius: 12px;
+}
+.pk-side.left .pk-score { color: var(--blue-grey-light); border: 1px solid var(--blue-grey); }
+.pk-side.right .pk-score { color: var(--purple-light); border: 1px solid var(--purple); }
+
+.pk-timer-bar {
+  text-align: center; margin-bottom: 16px;
+}
+.pk-timer {
+  font-size: 36px; font-weight: 900; color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+.pk-timer.warning { color: #e74c3c; animation: pulse 1s infinite; }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.5; } }
+
+.pk-question-card {
+  background: rgba(15,14,23,0.7); border-radius: 12px;
+  padding: 20px; margin-bottom: 16px; flex: 1;
+  display: flex; flex-direction: column;
+}
+.pk-question-text {
+  font-size: 15px; line-height: 1.7; margin-bottom: 16px; color: #e0e0e0;
+}
+.pk-options { display: flex; flex-direction: column; gap: 8px; }
+.pk-option {
+  padding: 12px 16px; border-radius: 10px; cursor: pointer;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  font-size: 14px; transition: all .2s; display: flex; align-items: center; gap: 10px;
+}
+.pk-option:hover { background: rgba(255,255,255,0.1); }
+.pk-option .opt-circle {
+  width: 24px; height: 24px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;
+}
+.pk-side.left .pk-option.correct {
+  background: rgba(40,167,69,0.2); border-color: #28a745;
+}
+.pk-side.left .pk-option.correct .opt-circle { border-color: #28a745; color: #28a745; }
+.pk-side.left .pk-option.wrong {
+  background: rgba(220,53,69,0.15); border-color: rgba(220,53,69,0.5);
+}
+.pk-side.right .pk-option.correct {
+  background: rgba(40,167,69,0.2); border-color: #28a745;
+}
+.pk-side.right .pk-option.correct .opt-circle { border-color: #28a745; color: #28a745; }
+.pk-side.right .pk-option.wrong {
+  background: rgba(220,53,69,0.15); border-color: rgba(220,53,69,0.5);
+}
+.pk-option.disabled { cursor: not-allowed; opacity: .6; }
+
+.pk-feedback {
+  text-align: center; font-size: 14px; margin-top: 10px; height: 20px;
+}
+.pk-feedback.correct { color: #5cb85c; }
+.pk-feedback.wrong { color: #e07a82; }
+
+.pk-answered-overlay {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5); display: none;
+  align-items: center; justify-content: center; font-size: 20px; font-weight: 700;
+  z-index: 10;
+}
+.pk-answered-overlay.show { display: flex; }
+
+/* 中央分隔線 */
+.pk-divider {
+  width: 2px; background: linear-gradient(180deg, transparent, var(--gold), transparent);
+  position: relative;
+}
+.pk-divider .vs-badge {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  background: var(--dark); border: 2px solid var(--gold);
+  width: 50px; height: 50px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 900; color: var(--gold-light);
+}
+
+/* ==================== 結算畫面 ==================== */
+.result-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.92); z-index: 2000;
+  display: none; align-items: center; justify-content: center;
+  flex-direction: column;
+}
+.result-overlay.active { display: flex; }
+.result-card {
+  background: linear-gradient(135deg, rgba(22,33,62,0.95), rgba(15,14,23,0.95));
+  border: 2px solid var(--gold); border-radius: 20px;
+  padding: 40px 60px; text-align: center; max-width: 600px;
+  animation: slideUp .5s ease-out;
+}
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.result-title {
+  font-size: 32px; font-weight: 900; margin-bottom: 10px;
+}
+.result-champion {
+  font-size: 48px; font-weight: 900; margin: 20px 0;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.result-message {
+  font-size: 20px; margin: 16px 0; padding: 12px 24px;
+  border-radius: 12px; font-weight: 500;
+}
+.result-scores {
+  display: flex; gap: 30px; justify-content: center; margin: 24px 0;
+}
+.result-score-box {
+  padding: 20px 30px; border-radius: 14px; min-width: 140px;
+}
+.result-score-box.left {
+  background: rgba(74,111,165,0.15); border: 1px solid var(--blue-grey);
+}
+.result-score-box.right {
+  background: rgba(155,127,207,0.15); border: 1px solid var(--purple);
+}
+.result-score-box .rs-name { font-size: 14px; margin-bottom: 8px; }
+.result-score-box .rs-score { font-size: 36px; font-weight: 900; }
+.result-score-box.left .rs-score { color: var(--blue-grey-light); }
+.result-score-box.right .rs-score { color: var(--purple-light); }
+
+/* ==================== 第三部分：錯題回顧 ==================== */
+.wrong-q-list { display: flex; flex-direction: column; gap: 12px; }
+.wrong-q-item {
+  background: rgba(22,33,62,0.6); border: 1px solid rgba(220,53,69,0.2);
+  border-radius: 12px; padding: 18px; font-size: 14px;
+}
+.wrong-q-item .wq-text { font-size: 15px; margin-bottom: 12px; line-height: 1.7; }
+.wrong-q-item .wq-row {
+  display: flex; gap: 12px; margin-bottom: 6px; font-size: 13px;
+}
+.wrong-q-item .wq-label { color: #888; min-width: 100px; }
+.wrong-q-item .wq-correct { color: #5cb85c; }
+.wrong-q-item .wq-wrong { color: #e07a82; }
+.wrong-q-item .wq-player-tag {
+  display: inline-block; font-size: 11px; padding: 2px 10px;
+  border-radius: 4px; margin-left: 8px;
+}
+.wrong-q-item .wq-player-tag.left { background: rgba(74,111,165,0.2); color: var(--blue-grey-light); }
+.wrong-q-item .wq-player-tag.right { background: rgba(155,127,207,0.2); color: var(--purple-light); }
+
+.empty-state {
+  text-align: center; padding: 60px 20px; color: #666; font-size: 15px;
+}
+
+/* ==================== 第四部分：排行榜 ==================== */
+.leaderboard-table {
+  width: 100%; border-collapse: collapse; margin-top: 16px;
+}
+.leaderboard-table th {
+  padding: 12px 16px; text-align: left; font-size: 13px;
+  color: #aaa; border-bottom: 2px solid rgba(255,255,255,0.1);
+}
+.leaderboard-table td {
+  padding: 12px 16px; font-size: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.leaderboard-table tr:hover td { background: rgba(255,255,255,0.03); }
+.lb-rank {
+  width: 40px; height: 40px; border-radius: 50%; display: inline-flex;
+  align-items: center; justify-content: center; font-weight: 700; font-size: 14px;
+}
+.lb-rank.gold { background: rgba(212,168,67,0.2); color: var(--gold-light); border: 1px solid var(--gold); }
+.lb-rank.silver { background: rgba(192,192,192,0.15); color: #ccc; border: 1px solid #aaa; }
+.lb-rank.bronze { background: rgba(205,127,50,0.15); color: #cd7f32; border: 1px solid #cd7f32; }
+.lb-rank.normal { background: rgba(255,255,255,0.05); color: #888; }
+
+/* ==================== Toast ==================== */
+.toast {
+  position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+  background: rgba(22,33,62,0.95); border: 1px solid var(--gold);
+  color: #e8d5b5; padding: 14px 28px; border-radius: 10px;
+  font-size: 14px; z-index: 3000; opacity: 0; transition: opacity .3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; }
+
+/* ==================== 滾動條 ==================== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+/* ==================== 響應式 ==================== */
+@media (max-width: 768px) {
+  .pk-board { flex-direction: column; height: auto; }
+  .pk-divider { width: 100%; height: 2px; }
+  .setup-row { flex-direction: column; }
+  .player-select-grid { grid-template-columns: repeat(4, 1fr); }
+  .result-scores { flex-direction: column; gap: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== 導航欄 ==================== -->
+<nav class="navbar">
+  <div class="logo">⚔️ 地理鬥獸場 · 河流與海岸</div>
+  <div class="nav-tabs">
+    <div class="nav-tab active" data-page="quiz">📚 題庫生成</div>
+    <div class="nav-tab" data-page="arena">🤺 競賽遊戲</div>
+    <div class="nav-tab" data-page="wrong">📝 錯題回顧</div>
+    <div class="nav-tab" data-page="leaderboard">🏆 排行榜</div>
+  </div>
+</nav>
+
+<!-- ==================== 第一部分：題庫生成 ==================== -->
+<div class="page-container active" id="page-quiz">
+  <h1 class="page-title">📚 題庫生成</h1>
+  <p class="page-subtitle">批量添加題目、DIY 自創題目，為競賽做好準備</p>
+
+  <!-- 子標籤 -->
+  <div class="quiz-section-tabs">
+    <div class="quiz-section-tab active" data-qmode="ai">🤖 AI 智能生成</div>
+    <div class="quiz-section-tab" data-qmode="manual">📋 手動題目庫</div>
+    <div class="quiz-section-tab" data-qmode="diy">✏️ 教師 DIY</div>
+  </div>
+
+  <!-- AI 生成 -->
+  <div class="card ai-gen-box active" id="ai-gen-box">
+    <div class="card-title"><span class="icon">🤖</span> AI 智能生成題目</div>
+    <p style="font-size:13px;color:#aaa;margin-bottom:12px;">選擇生成數量，系統將自動生成 DSE 地理（河流與海岸）相關題目</p>
+    <div class="ai-amount-row">
+      <div class="ai-amount-btn" data-amount="5">5<span class="label">題</span></div>
+      <div class="ai-amount-btn" data-amount="10">10<span class="label">題</span></div>
+      <div class="ai-amount-btn" data-amount="20">20<span class="label">題</span></div>
+    </div>
+    <button class="btn btn-primary btn-large" id="btn-ai-generate" disabled>⚡ 批量生成題目</button>
+  </div>
+
+  <!-- 手動題目庫 -->
+  <div class="card manual-box" id="manual-box">
+    <div class="card-title"><span class="icon">📋</span> 手動題目庫 · 自由選題</div>
+    <p style="font-size:13px;color:#aaa;margin-bottom:12px;">點擊題目卡片即可加入題目列表，數量不限</p>
+    <div class="manual-q-list" id="manual-q-list"></div>
+    <div style="margin-top:16px;text-align:center;">
+      <button class="btn btn-secondary" id="btn-manual-clear">清空選擇</button>
+    </div>
+  </div>
+
+  <!-- DIY -->
+  <div class="card diy-box" id="diy-box">
+    <div class="card-title"><span class="icon">✏️</span> 教師 DIY 自創題目</div>
+    <label class="field-label">題目內容</label>
+    <textarea id="diy-question" rows="3" placeholder="輸入你的題目內容..."></textarea>
+    <label class="field-label">選項（點擊 ✓ 標記正確答案）</label>
+    <div class="diy-options-row" id="diy-options">
+      <div class="diy-option-input" data-opt="0">
+        <span class="opt-letter">A</span>
+        <input type="text" placeholder="選項 A 內容" class="diy-opt-text">
+        <span class="diy-answer-mark" title="標記為正確答案">✓</span>
+      </div>
+      <div class="diy-option-input" data-opt="1">
+        <span class="opt-letter">B</span>
+        <input type="text" placeholder="選項 B 內容" class="diy-opt-text">
+        <span class="diy-answer-mark" title="標記為正確答案">✓</span>
+      </div>
+      <div class="diy-option-input" data-opt="2">
+        <span class="opt-letter">C</span>
+        <input type="text" placeholder="選項 C 內容" class="diy-opt-text">
+        <span class="diy-answer-mark" title="標記為正確答案">✓</span>
+      </div>
+      <div class="diy-option-input" data-opt="3">
+        <span class="opt-letter">D</span>
+        <input type="text" placeholder="選項 D 內容" class="diy-opt-text">
+        <span class="diy-answer-mark" title="標記為正確答案">✓</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;">
+      <button class="btn btn-primary" id="btn-diy-save">💾 保存到題庫</button>
+      <button class="btn btn-purple" id="btn-diy-add-list">➕ 加入題目列表</button>
+      <button class="btn btn-danger" id="btn-diy-clear">🗑️ 清空</button>
+    </div>
+  </div>
+
+  <!-- 題目列表 -->
+  <div class="quiz-list-section">
+    <div class="card">
+      <div class="quiz-list-header">
+        <h3>📋 本次競賽題目列表</h3>
+        <span class="quiz-list-count" id="quiz-list-count">0 題</span>
+      </div>
+      <div class="quiz-list-items" id="quiz-list-items">
+        <div class="empty-state">尚未添加任何題目，請從上方選擇題目</div>
+      </div>
+      <div style="margin-top:20px;text-align:center;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn btn-primary btn-large" id="btn-go-arena" disabled>🤺 前往競賽 →</button>
+        <button class="btn btn-danger" id="btn-clear-list">清空列表</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 第二部分：競賽遊戲 ==================== -->
+<div class="page-container" id="page-arena">
+  <!-- 設定區 -->
+  <div class="setup-area" id="setup-area">
+    <h1 class="page-title">🤺 競賽遊戲</h1>
+    <p class="page-subtitle">選擇玩家、設定時間，開始 PK 對決</p>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">👥</span> 選擇對決玩家</div>
+      <div class="setup-row">
+        <div class="setup-field">
+          <label class="field-label" style="color:var(--blue-grey-light);">左側 · 玩家 1（藍灰色）</label>
+          <div class="player-select-grid" id="player-grid-left"></div>
+          <div style="margin-top:8px;font-size:13px;color:var(--blue-grey-light);" id="player-left-name">未選擇</div>
+        </div>
+        <div class="setup-field">
+          <label class="field-label" style="color:var(--purple-light);">右側 · 玩家 2（淡紫色）</label>
+          <div class="player-select-grid" id="player-grid-right"></div>
+          <div style="margin-top:8px;font-size:13px;color:var(--purple-light);" id="player-right-name">未選擇</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">⏱️</span> 選擇倒計時時長</div>
+      <div class="time-select-row">
+        <div class="time-btn" data-time="60">1 分鐘<span class="sub">60 秒</span></div>
+        <div class="time-btn" data-time="180">3 分鐘<span class="sub">180 秒</span></div>
+        <div class="time-btn" data-time="300">5 分鐘<span class="sub">300 秒</span></div>
+      </div>
+    </div>
+
+    <div style="text-align:center;padding:20px 0;">
+      <button class="btn btn-primary btn-large" id="btn-start-pk" disabled>⚔️ 開始競賽</button>
+    </div>
+  </div>
+
+  <!-- PK 界面 -->
+  <div class="pk-container" id="pk-container">
+    <div class="pk-board">
+      <!-- 左側 -->
+      <div class="pk-side left">
+        <div class="pk-header">
+          <div class="pk-player-name" id="pk-left-name">玩家 1</div>
+          <div class="pk-score" id="pk-left-score">0</div>
+        </div>
+        <div class="pk-timer-bar">
+          <div class="pk-timer" id="pk-left-timer">--:--</div>
+        </div>
+        <div class="pk-question-card" id="pk-left-card">
+          <div class="pk-question-text" id="pk-left-question">準備中...</div>
+          <div class="pk-options" id="pk-left-options"></div>
+          <div class="pk-feedback" id="pk-left-feedback"></div>
+        </div>
+        <div class="pk-answered-overlay" id="pk-left-overlay">已作答</div>
+      </div>
+
+      <!-- 分隔 -->
+      <div class="pk-divider"><div class="vs-badge">VS</div></div>
+
+      <!-- 右側 -->
+      <div class="pk-side right">
+        <div class="pk-header">
+          <div class="pk-player-name" id="pk-right-name">玩家 2</div>
+          <div class="pk-score" id="pk-right-score">0</div>
+        </div>
+        <div class="pk-timer-bar">
+          <div class="pk-timer" id="pk-right-timer">--:--</div>
+        </div>
+        <div class="pk-question-card" id="pk-right-card">
+          <div class="pk-question-text" id="pk-right-question">準備中...</div>
+          <div class="pk-options" id="pk-right-options"></div>
+          <div class="pk-feedback" id="pk-right-feedback"></div>
+        </div>
+        <div class="pk-answered-overlay" id="pk-right-overlay">已作答</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 第三部分：錯題回顧 ==================== -->
+<div class="page-container" id="page-wrong">
+  <h1 class="page-title">📝 錯題回顧</h1>
+  <p class="page-subtitle">回顧競賽中答錯的題目，查漏補缺</p>
+  <div class="card">
+    <div class="wrong-q-list" id="wrong-q-list">
+      <div class="empty-state">暫無錯題記錄，開始競賽後這裡會顯示答錯的題目</div>
+    </div>
+    <div style="margin-top:16px;text-align:center;">
+      <button class="btn btn-danger" id="btn-clear-wrong" style="display:none;">清空錯題</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 第四部分：排行榜 ==================== -->
+<div class="page-container" id="page-leaderboard">
+  <h1 class="page-title">🏆 排行榜</h1>
+  <p class="page-subtitle">歷次競賽成績排行，看看誰是地理狀元</p>
+  <div class="card">
+    <table class="leaderboard-table" id="leaderboard-table">
+      <thead>
+        <tr>
+          <th>排名</th>
+          <th>玩家</th>
+          <th>得分</th>
+          <th>總題數</th>
+          <th>正確率</th>
+          <th>結果</th>
+          <th>日期</th>
+        </tr>
+      </thead>
+      <tbody id="leaderboard-body">
+        <tr><td colspan="7" class="empty-state">暫無排行記錄</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:16px;text-align:center;">
+      <button class="btn btn-danger" id="btn-clear-lb" style="display:none;">清空排行榜</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 結算覆蓋層 ==================== -->
+<div class="result-overlay" id="result-overlay">
+  <div class="result-card">
+    <div class="result-title" id="result-title">競賽結束</div>
+    <div class="result-champion" id="result-champion"></div>
+    <div class="result-message" id="result-message"></div>
+    <div class="result-scores">
+      <div class="result-score-box left">
+        <div class="rs-name" id="rs-left-name">玩家 1</div>
+        <div class="rs-score" id="rs-left-score">0</div>
+      </div>
+      <div class="result-score-box right">
+        <div class="rs-name" id="rs-right-name">玩家 2</div>
+        <div class="rs-score" id="rs-right-score">0</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;justify-content:center;margin-top:12px;">
+      <button class="btn btn-primary btn-large" id="btn-replay">🔄 再玩一次</button>
+      <button class="btn btn-secondary btn-large" id="btn-back-quiz">📚 返回題庫</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Toast ==================== -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ==================== 題庫數據 ====================
+const QUESTION_BANK = [
+  {q:"河流侵蝕作用主要包括哪四種？", options:["水力作用、磨蝕作用、磨耗作用、溶解作用","風化作用、侵蝕作用、搬運作用、沉積作用","蒸發作用、凝結作用、降水作用、逕流作用","溶解作用、氧化作用、水合作用、碳酸化作用"], answer:0, topic:"河流"},
+  {q:"河流的源頭通常位於什麼地形？", options:["三角洲","沖積扇","山地/高原","河口灣"], answer:2, topic:"河流"},
+  {q:"V形河谷主要由哪種侵蝕作用形成？", options:["側向侵蝕","垂直侵蝕（下蝕）","頭部侵蝕（溯源侵蝕）","化學侵蝕"], answer:1, topic:"河流"},
+  {q:"曲流（meander）外灣的侵蝕作用稱為什麼？", options:["堆積侵蝕","側蝕（掏蝕）","溯源侵蝕","溶蝕"], answer:1, topic:"河流"},
+  {q:"河流中游的特徵是什麼？", options:["流速最快、垂直侵蝕為主","流速減慢、側向侵蝕為主、形成曲流","流速極慢、大量沉積","完全沒有水流"], answer:1, topic:"河流"},
+  {q:"牛軛湖（oxbow lake）是如何形成的？", options:["河流源頭的侵蝕形成","曲流被截彎取直後形成","河口沉積形成","人工挖掘形成"], answer:1, topic:"河流"},
+  {q:"河流下游的沉積物特徵是什麼？", options:["顆粒粗大、稜角分明","顆粒細小、圓潤光滑","完全沒有沉積物","只有巨石"], answer:1, topic:"河流"},
+  {q:"三角洲形成的條件是什麼？", options:["河流流速快、波浪強","河流搬運大量沉積物、河口流速驟減、海水淺","河口水深、潮汐強","河流沒有沉積物"], answer:1, topic:"河流"},
+  {q:"河流的負荷（load）可分為哪三種運送方式？", options:["懸移、推移、溶移","跳移、滑移、滾移","飛移、游移、沉移","上移、下移、平移"], answer:0, topic:"河流"},
+  {q:"水系（drainage basin）的定義是什麼？", options:["河流流經的路線","由分水嶺圍繞的集水區域","河流的長度","河流的深度"], answer:1, topic:"河流"},
+  {q:"分水嶺（watershed）是指什麼？", options:["河流最深的地方","分隔兩個水系的高地","河流的出口","河流的轉折點"], answer:1, topic:"河流"},
+  {q:"河流侵蝕力最強的階段是什麼？", options:["上游","中游","下游","河口"], answer:0, topic:"河流"},
+  {q:"瀑布的形成與下列哪個因素最相關？", options:["軟硬岩層交替、差異侵蝕","河流流速太慢","沉積作用為主","河流太淺"], answer:0, topic:"河流"},
+  {q:"河流的流量（discharge）計算公式是什麼？", options:["流速 × 河深","流速 × 河寬 × 河深","河寬 × 河深","流速 × 河寬"], answer:1, topic:"河流"},
+  {q:"河谷（valley）與河槽（channel）的區別是？", options:["沒有區別","河谷是整個凹陷地形，河槽是水流通道","河谷在水上面，河槽在水下面","河谷是天然的，河槽是人造的"], answer:1, topic:"河流"},
+  {q:"沖積平原（alluvial plain）的形成原因是？", options:["河流上游的侵蝕","河流泛濫時沉積物堆積","人工填海","風力沉積"], answer:1, topic:"河流"},
+  {q:"河流的基準面（base level）是指什麼？", options:["河流的最高點","河流侵蝕的最低限度，通常為海平面","河流的平均水位","河流的洪水位"], answer:1, topic:"河流"},
+  {q:"溯源侵蝕（headward erosion）會導致什麼現象？", options:["河流變短","河流源頭向分水嶺方向延伸、河流襲奪","河流消失","河流變寬"], answer:1, topic:"河流"},
+  {q:"下列哪個不是海岸侵蝕作用？", options:["水力作用","磨蝕作用","溶解作用","堆積作用"], answer:3, topic:"海岸"},
+  {q:"海崖（cliff）後退的主要原因是？", options:["海浪侵蝕崖底形成海蝕洞→崩塌","風力侵蝕","河流侵蝕","生物侵蝕"], answer:0, topic:"海岸"},
+  {q:"海蝕平台（wave-cut platform）的形成過程是？", options:["海浪沉積形成","海崖後退後留下的平坦岩石面","人工填海形成","河流帶來的沉積物"], answer:1, topic:"海岸"},
+  {q:"下列哪個是海岸沉積地形？", options:["海蝕洞","海蝕柱","海灘","海崖"], answer:2, topic:"海岸"},
+  {q:"沙嘴（spit）的形成條件是？", options:["海岸線曲折、波浪弱","沿岸流攜帶沙泥在灣口沉積","潮差大","海岸岩石堅硬"], answer:1, topic:"海岸"},
+  {q:"灣形海灘（bayhead beach）形成於？", options:["海蝕崖腳","灣頭沿岸流減速沉積","河口處","人工填砂"], answer:1, topic:"海岸"},
+  {q:"陸連島（tombolo）是什麼？", options:["島與島之間的橋樑","島嶼與大陸之間由沙嘴連接的地形","人造的連島路","珊瑚礁連接"], answer:1, topic:"海岸"},
+  {q:"海岸分類中，下列哪項屬於沉積海岸？", options:["溺谷海岸","三角洲海岸","峽灣海岸","里亞斯海岸"], answer:1, topic:"海岸"},
+  {q:"下列哪種海岸類型的潮差最大？", options:["岩石海岸","沙質海岸","淤泥質海岸","紅樹林海岸"], answer:2, topic:"海岸"},
+  {q:"紅樹林海岸的分佈地區是？", options:["寒帶地區","溫帶地區","熱帶及亞熱帶潮間帶","極地地區"], answer:2, topic:"海岸"},
+  {q:"下列哪個因素不影響海岸地形的形成？", options:["波浪能量","潮汐作用","岩石抗蝕力","地球自轉速度"], answer:3, topic:"海岸"},
+  {q:"海浪的能量主要來自？", options:["月球引力","風力","太陽輻射","地球內部熱能"], answer:1, topic:"海岸"},
+  {q:"下列哪項是河流上游的地形特徵？", options:["寬闊的河谷","V形河谷、瀑布、急流","曲流發達","三角洲"], answer:1, topic:"河流"},
+  {q:"河流搬運能力的定義是？", options:["河流能搬運的最大顆粒大小","河流的總水量","河流的長度","河流的坡度"], answer:0, topic:"河流"},
+  {q:"侵蝕基準面對河流的影響是？", options:["基準面下降，河流侵蝕加強","基準面上升，河流侵蝕加強","基準面不影響河流","基準面只影響沉積"], answer:0, topic:"河流"},
+  {q:"曲流內灣（slip-off slope）的主要作用是？", options:["侵蝕","沉積","溶解","搬運"], answer:1, topic:"河流"},
+  {q:"河階（river terrace）的形成原因是？", options:["河流侵蝕加深","地殼上升或基準面下降，河流下切侵蝕舊河床","人工開挖","沉積物堆積"], answer:1, topic:"河流"},
+  {q:"下列哪個不是三角洲的類型？", options:["弧形三角洲","鳥足狀三角洲","尖頭三角洲","峽灣三角洲"], answer:3, topic:"河流"},
+  {q:"海岸線前進（progradation）的條件是？", options:["侵蝕大於沉積","沉積大於侵蝕","潮汐作用強","沒有沉積物"], answer:1, topic:"海岸"},
+  {q:"海岸線後退（retrogradation）的條件是？", options:["沉積大於侵蝕","侵蝕大於沉積","波浪能量弱","沒有海浪"], answer:1, topic:"海岸"},
+  {q:"下列哪項是海岸管理的硬工程方法？", options:["種植紅樹林","海堤、防波堤、丁壩"," beach nourishment","禁止開發"], answer:1, topic:"海岸"},
+  {q:"下列哪項是海岸管理的軟工程方法？", options:["建海堤","建防波堤","海灘人工補沙、種植植被","建丁壩"], answer:2, topic:"海岸"},
+  {q:"河流的坡降（gradient）在上游通常是？", options:["非常平緩","中等","陡峭","接近水平"], answer:2, topic:"河流"},
+  {q:"下列哪項最能描述河流的「流域」概念？", options:["河流流過的路線","由分水嶺包圍的整個集水區域","河流的寬度","河水的體積"], answer:1, topic:"河流"},
+  {q:"氾濫平原上自然堤（natural levee）的形成原因是？", options:["人工建造","河流氾濫時粗粒沉積物在兩岸堆積","風力堆積","冰川堆積"], answer:1, topic:"河流"},
+  {q:"河流的水文曲線（hydrograph）顯示什麼？", options:["河流流速變化","流量隨時間的變化","河床剖面","河流走向"], answer:1, topic:"河流"},
+  {q:"下列哪種情況會增加河流的洪峰流量？", options:["流域植被茂密","流域城市化、不透水面積增加","降雨歷時長、強度小","流域面積大"], answer:1, topic:"河流"},
+  {q:"海蝕洞、海蝕拱、海蝕柱的演化順序是？", options:["海蝕柱→海蝕洞→海蝕拱","海蝕洞→海蝕拱→海蝕柱","海蝕拱→海蝕柱→海蝕洞","海蝕洞→海蝕柱→海蝕拱"], answer:1, topic:"海岸"},
+  {q:"下列哪個是岩岸（岩石海岸）的特徵？", options:["海灘寬闊","海岸線曲折、岬灣交替","潮差小","地勢平坦"], answer:1, topic:"海岸"},
+  {q:"沿岸流（longshore current）對海岸的影響是？", options:["只造成侵蝕","搬運和重新分配沿岸沉積物","只造成沉積","沒有影響"], answer:1, topic:"海岸"},
+  {q:"下列哪個因素最影響海灘的季節變化？", options:["海水溫度","波浪能量的季節變化","月相變化","潮汐類型"], answer:1, topic:"海岸"},
+  {q:"溺谷（ria）海岸的形成原因是？", options:["河流沉積","陸地沉降或海平面上升淹沒河谷","火山噴發","冰川侵蝕"], answer:1, topic:"海岸"},
+  {q:"峽灣（fjord）海岸的形成原因是？", options:["河流侵蝕","冰川U形谷被海水淹沒","風力侵蝕","海浪侵蝕"], answer:1, topic:"海岸"},
+  {q:"下列哪個不是河流沉積地形？", options:["沖積扇","三角洲","牛軛湖","海蝕平台"], answer:3, topic:"河流"},
+  {q:"沖積扇（alluvial fan）通常形成於？", options:["河流入海口","山地出口處河流流速驟減","河流上游","河流中游"], answer:1, topic:"河流"},
+  {q:"下列哪項是曲流形成的必要條件？", options:["河流坡度極陡","河流有一定坡度且兩岸抗蝕力不均","河流完全筆直","河流在山區"], answer:1, topic:"河流"},
+  {q:"下列哪個是 DSE 地理中河流的主要功能？", options:["侵蝕、搬運、沉積","蒸發、凝結、降水","風化、侵蝕、堆積","溶解、氧化、水合"], answer:0, topic:"河流"},
+  {q:"海岸沉積物的圓度和分選性在怎樣的海岸最好？", options:["海蝕崖腳","沙灘（反覆磨蝕和搬運）","紅樹林泥灘","岩石平台"], answer:1, topic:"海岸"},
+  {q:"下列哪項最能解釋河口灣（estuary）的特徵？", options:["純淡水環境","淡鹹水混合、潮汐影響明顯","純海水環境","沒有水流"], answer:1, topic:"海岸"},
+  {q:"下列哪個是影響河流流速的最主要因素？", options:["河水顏色","河道坡度、河床粗糙度、河水深寬","河流名稱","河流長度"], answer:1, topic:"河流"},
+  {q:"下列哪項不是減少河流洪災的措施？", options:["植樹造林","加高堤防","城市化建設","修建水庫"], answer:2, topic:"河流"},
+];
+
+// ==================== 全域狀態 ====================
+const STATE = {
+  bankQuestions: [],        // 題庫中保存的 DIY 題目
+  quizList: [],             // 本次競賽題目列表
+  manualSelected: new Set(),// 手動選題已選索引
+  aiSelectedAmount: null,   // AI 選擇的數量
+  selectedTime: null,       // 倒計時時長
+  playerLeft: null,         // 左側玩家編號
+  playerRight: null,        // 右側玩家編號
+  // PK 狀態
+  pk: {
+    active: false,
+    leftQuestions: [],
+    rightQuestions: [],
+    leftIndex: 0,
+    rightIndex: 0,
+    leftScore: 0,
+    rightScore: 0,
+    leftAnswered: false,
+    rightAnswered: false,
+    timer: null,
+    timeLeft: 0,
+    wrongQuestions: [],
+  },
+  leaderboard: [],          // 排行榜數據
+  wrongQuestions: [],       // 錯題記錄
+};
+
+// ==================== 工具函數 ====================
+function showToast(msg, duration=2500) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), duration);
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function formatTime(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+// ==================== 導航 ====================
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const page = tab.dataset.page;
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.page-container').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('page-' + page).classList.add('active');
+  });
+});
+
+// ==================== 題庫子標籤 ====================
+document.querySelectorAll('.quiz-section-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const mode = tab.dataset.qmode;
+    document.querySelectorAll('.quiz-section-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    document.querySelectorAll('.ai-gen-box, .manual-box, .diy-box').forEach(b => b.classList.remove('active'));
+    if (mode === 'ai') document.getElementById('ai-gen-box').classList.add('active');
+    if (mode === 'manual') {
+      document.getElementById('manual-box').classList.add('active');
+      renderManualQuestions();
+    }
+    if (mode === 'diy') document.getElementById('diy-box').classList.add('active');
+  });
+});
+
+// ==================== AI 生成 ====================
+let aiAmountSelected = null;
+document.querySelectorAll('.ai-amount-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.ai-amount-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    aiAmountSelected = parseInt(btn.dataset.amount);
+    document.getElementById('btn-ai-generate').disabled = false;
+  });
+});
+
+document.getElementById('btn-ai-generate').addEventListener('click', () => {
+  if (!aiAmountSelected) return;
+  const shuffled = shuffle(QUESTION_BANK);
+  const selected = shuffled.slice(0, aiAmountSelected).map((q, i) => ({
+    ...q,
+    id: 'ai_' + Date.now() + '_' + i,
+    source: 'AI生成',
+    isDiy: false,
+  }));
+  STATE.quizList = selected;
+  renderQuizList();
+  showToast(`已生成 ${aiAmountSelected} 題，即將跳轉到競賽...`);
+  setTimeout(() => {
+    goToPage('arena');
+    checkStartReady();
+  }, 1500);
+});
+
+// ==================== 手動題目庫 ====================
+function renderManualQuestions() {
+  const container = document.getElementById('manual-q-list');
+  container.innerHTML = '';
+  QUESTION_BANK.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'manual-q-card';
+    if (STATE.manualSelected.has(i)) card.classList.add('added');
+    card.innerHTML = `
+      <span class="mq-tag">${q.topic || '地理'}</span>
+      <div>${q.q}</div>
+    `;
+    card.addEventListener('click', () => {
+      if (STATE.manualSelected.has(i)) {
+        STATE.manualSelected.delete(i);
+        STATE.quizList = STATE.quizList.filter(item => item._manualIdx !== i);
+        card.classList.remove('added');
+      } else {
+        STATE.manualSelected.add(i);
+        STATE.quizList.push({
+          ...q,
+          id: 'manual_' + Date.now() + '_' + i,
+          _manualIdx: i,
+          source: '手動選題',
+          isDiy: false,
+        });
+        card.classList.add('added');
+      }
+      renderQuizList();
+      checkStartReady();
+    });
+    container.appendChild(card);
+  });
+}
+
+document.getElementById('btn-manual-clear').addEventListener('click', () => {
+  STATE.manualSelected.clear();
+  STATE.quizList = STATE.quizList.filter(item => item.source !== '手動選題');
+  renderManualQuestions();
+  renderQuizList();
+  checkStartReady();
+  showToast('已清空手動選擇');
+});
+
+// ==================== DIY 題目 ====================
+let diyCorrectIdx = -1;
+
+document.querySelectorAll('.diy-answer-mark').forEach((mark, idx) => {
+  mark.addEventListener('click', () => {
+    document.querySelectorAll('.diy-option-input').forEach(o => o.classList.remove('correct'));
+    document.querySelectorAll('.diy-answer-mark').forEach(m => m.classList.remove('active'));
+    mark.classList.add('active');
+    mark.closest('.diy-option-input').classList.add('correct');
+    diyCorrectIdx = idx;
+  });
+});
+
+function clearDiyForm() {
+  document.getElementById('diy-question').value = '';
+  document.querySelectorAll('.diy-opt-text').forEach(i => i.value = '');
+  document.querySelectorAll('.diy-option-input').forEach(o => o.classList.remove('correct'));
+  document.querySelectorAll('.diy-answer-mark').forEach(m => m.classList.remove('active'));
+  diyCorrectIdx = -1;
+}
+
+function getDiyQuestion() {
+  const q = document.getElementById('diy-question').value.trim();
+  if (!q) { showToast('請輸入題目內容'); return null; }
+  const options = [];
+  document.querySelectorAll('.diy-opt-text').forEach(input => {
+    options.push(input.value.trim());
+  });
+  if (options.some(o => !o)) { showToast('請填寫所有選項'); return null; }
+  if (diyCorrectIdx < 0) { showToast('請標記正確答案'); return null; }
+  return {
+    q,
+    options,
+    answer: diyCorrectIdx,
+    topic: 'DIY',
+    isDiy: true,
+    source: '獨創',
+  };
+}
+
+document.getElementById('btn-diy-save').addEventListener('click', () => {
+  const q = getDiyQuestion();
+  if (!q) return;
+  q.id = 'diy_bank_' + Date.now();
+  STATE.bankQuestions.push(q);
+  showToast('✅ 已保存到題庫（標注為「獨創」題）');
+  clearDiyForm();
+});
+
+document.getElementById('btn-diy-add-list').addEventListener('click', () => {
+  const q = getDiyQuestion();
+  if (!q) return;
+  q.id = 'diy_list_' + Date.now();
+  STATE.quizList.push(q);
+  renderQuizList();
+  showToast('✅ 已加入題目列表');
+  clearDiyForm();
+  checkStartReady();
+});
+
+document.getElementById('btn-diy-clear').addEventListener('click', () => {
+  clearDiyForm();
+  showToast('已清空');
+});
+
+// ==================== 題目列表渲染 ====================
+function renderQuizList() {
+  const container = document.getElementById('quiz-list-items');
+  const countEl = document.getElementById('quiz-list-count');
+  countEl.textContent = STATE.quizList.length + ' 題';
+
+  if (STATE.quizList.length === 0) {
+    container.innerHTML = '<div class="empty-state">尚未添加任何題目，請從上方選擇題目</div>';
+    document.getElementById('btn-go-arena').disabled = true;
+    return;
+  }
+
+  container.innerHTML = '';
+  STATE.quizList.forEach((q, i) => {
+    const item = document.createElement('div');
+    item.className = 'quiz-list-item';
+    item.innerHTML = `
+      <div class="qi-text">
+        <strong>${i + 1}.</strong> ${q.q}
+        ${q.isDiy ? '<span class="qi-tag-diy">獨創</span>' : `<span class="qi-tag-diy" style="background:rgba(74,111,165,0.2);color:var(--blue-grey-light);">${q.source}</span>`}
+      </div>
+      <span class="qi-remove" data-idx="${i}">✕</span>
+    `;
+    container.appendChild(item);
+  });
+
+  container.querySelectorAll('.qi-remove').forEach(rm => {
+    rm.addEventListener('click', () => {
+      const idx = parseInt(rm.dataset.idx);
+      const removed = STATE.quizList[idx];
+      if (removed._manualIdx !== undefined) {
+        STATE.manualSelected.delete(removed._manualIdx);
+        renderManualQuestions();
+      }
+      STATE.quizList.splice(idx, 1);
+      renderQuizList();
+      checkStartReady();
+    });
+  });
+
+  document.getElementById('btn-go-arena').disabled = STATE.quizList.length === 0;
+}
+
+document.getElementById('btn-clear-list').addEventListener('click', () => {
+  STATE.quizList = [];
+  STATE.manualSelected.clear();
+  renderManualQuestions();
+  renderQuizList();
+  checkStartReady();
+  showToast('已清空題目列表');
+});
+
+document.getElementById('btn-go-arena').addEventListener('click', () => {
+  goToPage('arena');
+  checkStartReady();
+});
+
+function goToPage(page) {
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.page-container').forEach(p => p.classList.remove('active'));
+  document.querySelector(`.nav-tab[data-page="${page}"]`).classList.add('active');
+  document.getElementById('page-' + page).classList.add('active');
+}
+
+// ==================== 競賽設定 ====================
+function renderPlayerGrids() {
+  ['left', 'right'].forEach(side => {
+    const grid = document.getElementById('player-grid-' + side);
+    grid.innerHTML = '';
+    for (let i = 1; i <= 30; i++) {
+      const item = document.createElement('div');
+      item.className = 'player-select-item';
+      item.textContent = '玩家 ' + i;
+      item.dataset.player = i;
+      item.dataset.side = side;
+      item.addEventListener('click', () => {
+        grid.querySelectorAll('.player-select-item').forEach(it => it.classList.remove('selected-' + side));
+        item.classList.add('selected-' + side);
+        if (side === 'left') {
+          STATE.playerLeft = i;
+          document.getElementById('player-left-name').textContent = '已選擇：玩家 ' + i;
+        } else {
+          STATE.playerRight = i;
+          document.getElementById('player-right-name').textContent = '已選擇：玩家 ' + i;
+        }
+        checkStartReady();
+      });
+      grid.appendChild(item);
+    }
+  });
+}
+renderPlayerGrids();
+
+document.querySelectorAll('.time-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    STATE.selectedTime = parseInt(btn.dataset.time);
+    checkStartReady();
+  });
+});
+
+function checkStartReady() {
+  const ready = STATE.quizList.length > 0 && STATE.playerLeft !== null && STATE.playerRight !== null && STATE.selectedTime !== null;
+  document.getElementById('btn-start-pk').disabled = !ready;
+  if (!ready && STATE.quizList.length === 0) {
+    // 不顯示提示，按鈕灰色即可
+  }
+}
+
+// ==================== PK 競賽邏輯 ====================
+document.getElementById('btn-start-pk').addEventListener('click', startPK);
+
+function startPK() {
+  if (STATE.quizList.length === 0) { showToast('請先添加題目'); return; }
+  if (STATE.playerLeft === null || STATE.playerRight === null) { showToast('請選擇兩位玩家'); return; }
+  if (STATE.selectedTime === null) { showToast('請選擇倒計時時長'); return; }
+
+  // 為左右兩側分別隨機抽取題目（可不一致）
+  const shuffled1 = shuffle(STATE.quizList);
+  const shuffled2 = shuffle(STATE.quizList);
+
+  STATE.pk = {
+    active: true,
+    leftQuestions: shuffled1,
+    rightQuestions: shuffled2,
+    leftIndex: 0,
+    rightIndex: 0,
+    leftScore: 0,
+    rightScore: 0,
+    leftAnswered: false,
+    rightAnswered: false,
+    timer: null,
+    timeLeft: STATE.selectedTime,
+    totalQuestions: STATE.quizList.length,
+    wrongQuestions: [],
+  };
+
+  // 切換到 PK 界面
+  document.getElementById('setup-area').style.display = 'none';
+  document.getElementById('pk-container').classList.add('active');
+
+  // 設定玩家名
+  document.getElementById('pk-left-name').textContent = '玩家 ' + STATE.playerLeft;
+  document.getElementById('pk-right-name').textContent = '玩家 ' + STATE.playerRight;
+  document.getElementById('pk-left-score').textContent = '0';
+  document.getElementById('pk-right-score').textContent = '0';
+
+  // 渲染第一題
+  renderPKQuestion('left');
+  renderPKQuestion('right');
+
+  // 啟動計時器
+  startTimer();
+}
+
+function renderPKQuestion(side) {
+  const pk = STATE.pk;
+  const questions = side === 'left' ? pk.leftQuestions : pk.rightQuestions;
+  const index = side === 'left' ? pk.leftIndex : pk.rightIndex;
+
+  if (index >= questions.length) {
+    // 該側已完成所有題目
+    document.getElementById('pk-' + side + '-question').textContent = '已完成所有題目！';
+    document.getElementById('pk-' + side + '-options').innerHTML = '';
+    document.getElementById('pk-' + side + '-overlay').classList.add('show');
+    checkGameEnd();
+    return;
+  }
+
+  const q = questions[index];
+  document.getElementById('pk-' + side + '-question').textContent = `第 ${index + 1}/${questions.length} 題\n\n${q.q}`;
+
+  const optionsContainer = document.getElementById('pk-' + side + '-options');
+  optionsContainer.innerHTML = '';
+
+  q.options.forEach((opt, i) => {
+    const optEl = document.createElement('div');
+    optEl.className = 'pk-option';
+    optEl.innerHTML = `<div class="opt-circle">${String.fromCharCode(65 + i)}</div><span>${opt}</span>`;
+    optEl.addEventListener('click', () => handleAnswer(side, i, optEl));
+    optionsContainer.appendChild(optEl);
+  });
+
+  document.getElementById('pk-' + side + '-feedback').textContent = '';
+  document.getElementById('pk-' + side + '-feedback').className = 'pk-feedback';
+  document.getElementById('pk-' + side + '-overlay').classList.remove('show');
+
+  if (side === 'left') pk.leftAnswered = false;
+  else pk.rightAnswered = false;
+}
+
+function handleAnswer(side, choice, optEl) {
+  const pk = STATE.pk;
+  if (side === 'left' && pk.leftAnswered) return;
+  if (side === 'right' && pk.rightAnswered) return;
+
+  const questions = side === 'left' ? pk.leftQuestions : pk.rightQuestions;
+  const index = side === 'left' ? pk.leftIndex : pk.rightIndex;
+  const q = questions[index];
+  const isCorrect = choice === q.answer;
+
+  if (side === 'left') pk.leftAnswered = true;
+  else pk.rightAnswered = true;
+
+  // 標記選項
+  const allOpts = document.querySelectorAll('#pk-' + side + '-options .pk-option');
+  allOpts.forEach(o => o.classList.add('disabled'));
+
+  if (isCorrect) {
+    optEl.classList.add('correct');
+    if (side === 'left') {
+      pk.leftScore++;
+      document.getElementById('pk-left-score').textContent = pk.leftScore;
+    } else {
+      pk.rightScore++;
+      document.getElementById('pk-right-score').textContent = pk.rightScore;
+    }
+    document.getElementById('pk-' + side + '-feedback').textContent = '✅ 答對了！+1 分';
+    document.getElementById('pk-' + side + '-feedback').classList.add('correct');
+  } else {
+    optEl.classList.add('wrong');
+    // 標記正確答案
+    allOpts[q.answer].classList.add('correct');
+    document.getElementById('pk-' + side + '-feedback').textContent = '❌ 答錯了！正確答案：' + String.fromCharCode(65 + q.answer);
+    document.getElementById('pk-' + side + '-feedback').classList.add('wrong');
+
+    // 記錄錯題
+    pk.wrongQuestions.push({
+      ...q,
+      playerSide: side,
+      playerNum: side === 'left' ? STATE.playerLeft : STATE.playerRight,
+      wrongChoice: choice,
+    });
+  }
+
+  // 顯示已作答覆蓋層
+  document.getElementById('pk-' + side + '-overlay').classList.add('show');
+
+  // 延遲後進入下一題
+  setTimeout(() => {
+    if (side === 'left') pk.leftIndex++;
+    else pk.rightIndex++;
+    renderPKQuestion(side);
+  }, 2000);
+
+  // 檢查是否結束
+  checkGameEnd();
+}
+
+function startTimer() {
+  const pk = STATE.pk;
+  updateTimerDisplay();
+
+  pk.timer = setInterval(() => {
+    pk.timeLeft--;
+    updateTimerDisplay();
+
+    if (pk.timeLeft <= 0) {
+      clearInterval(pk.timer);
+      endGame('timeout');
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const pk = STATE.pk;
+  const leftTimer = document.getElementById('pk-left-timer');
+  const rightTimer = document.getElementById('pk-right-timer');
+
+  leftTimer.textContent = formatTime(pk.timeLeft);
+  rightTimer.textContent = formatTime(pk.timeLeft);
+
+  if (pk.timeLeft <= 30) {
+    leftTimer.classList.add('warning');
+    rightTimer.classList.add('warning');
+  } else {
+    leftTimer.classList.remove('warning');
+    rightTimer.classList.remove('warning');
+  }
+}
+
+function checkGameEnd() {
+  const pk = STATE.pk;
+  // 兩側都完成所有題目
+  const leftDone = pk.leftIndex >= pk.leftQuestions.length;
+  const rightDone = pk.rightIndex >= pk.rightQuestions.length;
+
+  if (leftDone && rightDone) {
+    clearInterval(pk.timer);
+    setTimeout(() => endGame('completed'), 500);
+  }
+}
+
+function endGame(reason) {
+  const pk = STATE.pk;
+  if (!pk.active) return;
+  pk.active = false;
+  if (pk.timer) clearInterval(pk.timer);
+
+  const totalQ = pk.totalQuestions;
+  const leftScore = pk.leftScore;
+  const rightScore = pk.rightScore;
+
+  // 記錄錯題
+  STATE.wrongQuestions.push(...pk.wrongQuestions);
+
+  // 更新排行榜
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('zh-HK') + ' ' + now.toLocaleTimeString('zh-HK', {hour:'2-digit',minute:'2-digit'});
+
+  STATE.leaderboard.push({
+    player: '玩家 ' + STATE.playerLeft,
+    score: leftScore,
+    total: totalQ,
+    rate: totalQ > 0 ? Math.round(leftScore / totalQ * 100) : 0,
+    result: getResultLabel(leftScore, totalQ),
+    date: dateStr,
+    side: 'left',
+  });
+  STATE.leaderboard.push({
+    player: '玩家 ' + STATE.playerRight,
+    score: rightScore,
+    total: totalQ,
+    rate: totalQ > 0 ? Math.round(rightScore / totalQ * 100) : 0,
+    result: getResultLabel(rightScore, totalQ),
+    date: dateStr,
+    side: 'right',
+  });
+
+  // 排序排行榜（按分數降序，再按正確率）
+  STATE.leaderboard.sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    return b.rate - a.rate;
+  });
+
+  // 渲染結算畫面
+  showResult(leftScore, rightScore, totalQ);
+
+  // 更新錯題回顧和排行榜
+  renderWrongQuestions();
+  renderLeaderboard();
+}
+
+function getResultLabel(score, total) {
+  if (total === 0) return '無題目';
+  const rate = score / total;
+  if (score === 0) return '請DROP科，謝謝';
+  if (rate < 0.5) return '進步空間巨大，繼續努力！';
+  if (rate >= 0.8 && rate < 1.0) return '小菜一碟～';
+  if (rate === 1.0) return '地理狀元非你莫屬！';
+  return '尚可，再接再厲';
+}
+
+function showResult(leftScore, rightScore, totalQ) {
+  const overlay = document.getElementById('result-overlay');
+  overlay.classList.add('active');
+
+  document.getElementById('rs-left-name').textContent = '玩家 ' + STATE.playerLeft;
+  document.getElementById('rs-right-name').textContent = '玩家 ' + STATE.playerRight;
+  document.getElementById('rs-left-score').textContent = leftScore + ' / ' + totalQ;
+  document.getElementById('rs-right-score').textContent = rightScore + ' / ' + totalQ;
+
+  // 判定冠軍
+  let championText = '';
+  let messageText = '';
+  let messageColor = '';
+
+  if (leftScore === rightScore) {
+    championText = '🤝 平局！';
+    if (leftScore === 0) {
+      messageText = '請DROP科，謝謝';
+      messageColor = '#e74c3c';
+    } else {
+      const rate = leftScore / totalQ;
+      if (rate < 0.5) { messageText = '進步空間巨大，繼續努力！'; messageColor = '#e07a82'; }
+      else if (rate >= 0.8 && rate < 1.0) { messageText = '小菜一碟～'; messageColor = '#5cb85c'; }
+      else if (rate === 1.0) { messageText = '地理狀元非你莫屬！'; messageColor = 'var(--gold-light)'; }
+      else { messageText = '勢均力敵！'; messageColor = '#aaa'; }
+    }
+  } else {
+    const winner = leftScore > rightScore ? '玩家 ' + STATE.playerLeft : '玩家 ' + STATE.playerRight;
+    championText = '👑 冠軍：' + winner;
+
+    // 判定兩人是否都低於50%
+    const leftRate = leftScore / totalQ;
+    const rightRate = rightScore / totalQ;
+
+    if (leftScore === 0 && rightScore === 0) {
+      messageText = '請DROP科，謝謝';
+      messageColor = '#e74c3c';
+    } else if (leftRate < 0.5 && rightRate < 0.5) {
+      messageText = '進步空間巨大，繼續努力！';
+      messageColor = '#e07a82';
+    } else {
+      const winnerScore = Math.max(leftScore, rightScore);
+      const winnerRate = winnerScore / totalQ;
+      if (winnerRate === 1.0) { messageText = '地理狀元非你莫屬！'; messageColor = 'var(--gold-light)'; }
+      else if (winnerRate >= 0.8) { messageText = '小菜一碟～'; messageColor = '#5cb85c'; }
+      else { messageText = '勝出！繼續精進'; messageColor = '#5cb85c'; }
+    }
+  }
+
+  document.getElementById('result-champion').textContent = championText;
+  const msgEl = document.getElementById('result-message');
+  msgEl.textContent = messageText;
+  msgEl.style.color = messageColor;
+  msgEl.style.background = messageColor.includes('var') ? 'rgba(212,168,67,0.1)' : `${messageColor}15`;
+}
+
+document.getElementById('btn-replay').addEventListener('click', () => {
+  document.getElementById('result-overlay').classList.remove('active');
+  document.getElementById('pk-container').classList.remove('active');
+  document.getElementById('setup-area').style.display = 'block';
+  // 重置 PK 狀態
+  STATE.pk = {
+    active: false, leftQuestions: [], rightQuestions: [],
+    leftIndex: 0, rightIndex: 0, leftScore: 0, rightScore: 0,
+    leftAnswered: false, rightAnswered: false, timer: null,
+    timeLeft: 0, wrongQuestions: [],
+  };
+  checkStartReady();
+});
+
+document.getElementById('btn-back-quiz').addEventListener('click', () => {
+  document.getElementById('result-overlay').classList.remove('active');
+  document.getElementById('pk-container').classList.remove('active');
+  document.getElementById('setup-area').style.display = 'block';
+  goToPage('quiz');
+});
+
+// ==================== 錯題回顧 ====================
+function renderWrongQuestions() {
+  const container = document.getElementById('wrong-q-list');
+  const clearBtn = document.getElementById('btn-clear-wrong');
+
+  if (STATE.wrongQuestions.length === 0) {
+    container.innerHTML = '<div class="empty-state">暫無錯題記錄，開始競賽後這裡會顯示答錯的題目</div>';
+    clearBtn.style.display = 'none';
+    return;
+  }
+
+  clearBtn.style.display = 'inline-flex';
+  container.innerHTML = '';
+  STATE.wrongQuestions.forEach((q, i) => {
+    const item = document.createElement('div');
+    item.className = 'wrong-q-item';
+    const playerTag = q.playerSide === 'left'
+      ? `<span class="wq-player-tag left">玩家 ${q.playerNum}</span>`
+      : `<span class="wq-player-tag right">玩家 ${q.playerNum}</span>`;
+    item.innerHTML = `
+      <div class="wq-text"><strong>${i + 1}.</strong> ${q.q} ${playerTag}</div>
+      <div class="wq-row">
+        <span class="wq-label">你的答案：</span>
+        <span class="wq-wrong">${String.fromCharCode(65 + q.wrongChoice)}. ${q.options[q.wrongChoice]}</span>
+      </div>
+      <div class="wq-row">
+        <span class="wq-label">正確答案：</span>
+        <span class="wq-correct">${String.fromCharCode(65 + q.answer)}. ${q.options[q.answer]}</span>
+      </div>
+    `;
+    container.appendChild(item);
+  });
+}
+
+document.getElementById('btn-clear-wrong').addEventListener('click', () => {
+  STATE.wrongQuestions = [];
+  renderWrongQuestions();
+  showToast('已清空錯題記錄');
+});
+
+// ==================== 排行榜 ====================
+function renderLeaderboard() {
+  const tbody = document.getElementById('leaderboard-body');
+  const clearBtn = document.getElementById('btn-clear-lb');
+
+  if (STATE.leaderboard.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="7" class="empty-state">暫無排行記錄</td></tr>';
+    clearBtn.style.display = 'none';
+    return;
+  }
+
+  clearBtn.style.display = 'inline-flex';
+  tbody.innerHTML = '';
+  STATE.leaderboard.forEach((entry, i) => {
+    let rankClass = 'normal';
+    let rankContent = i + 1;
+    if (i === 0) { rankClass = 'gold'; rankContent = '🥇'; }
+    else if (i === 1) { rankClass = 'silver'; rankContent = '🥈'; }
+    else if (i === 2) { rankClass = 'bronze'; rankContent = '🥉'; }
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span class="lb-rank ${rankClass}">${rankContent}</span></td>
+      <td>${entry.player}</td>
+      <td><strong style="color:var(--gold-light);">${entry.score}</strong> / ${entry.total}</td>
+      <td>${entry.total}</td>
+      <td>${entry.rate}%</td>
+      <td style="font-size:13px;">${entry.result}</td>
+      <td style="font-size:12px;color:#888;">${entry.date}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+document.getElementById('btn-clear-lb').addEventListener('click', () => {
+  STATE.leaderboard = [];
+  renderLeaderboard();
+  showToast('已清空排行榜');
+});
+
+// ==================== 初始化 ====================
+renderQuizList();
+renderWrongQuestions();
+renderLeaderboard();
+</script>
+</body>
+</html>
